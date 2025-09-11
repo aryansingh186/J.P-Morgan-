@@ -28,12 +28,258 @@
                     </div>
 
                     <!-- Center: -->
-                    <nav class="hidden md:flex items-end -ml-[200px] text-gray-600 font-medium text-sm">
-                        <a href="#" class="mr-[18px] hover:text-black">Solutions</a>
-                        <a href="#" class="mr-[18px] hover:text-black">Who We Serve</a>
-                        <a href="#" class="mr-[18px] hover:text-black">Insights</a>
-                        <a href="#" class="hover:text-black">About Us</a>
+                    <nav
+                        class="mt-4 flex flex-row gap-x-4  -ml-[50px] text-[13px] font-[500] text-gray-600 hidden md:flex">
+                        <!-- Solutions -->
+                        <a href="#" data-target="solutions"
+                            class="py-3 flex items-center hover:text-black hover:font-bold">
+                            <span>Solutions</span>
+                            <svg class="ml-1 w-4 h-4 arrow transition-transform duration-200" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </a>
+
+                        <!-- Who We Serve -->
+                        <a href="#" data-target="who" class="py-3 flex items-center hover:text-black hover:font-bold">
+                            <span>Who We Serve</span>
+                            <svg class="ml-1 w-4 h-4 arrow transition-transform duration-200" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </a>
+
+                        <!-- Insights -->
+                        <a href="#" data-target="insight"
+                            class="py-3 flex items-center hover:text-black hover:font-bold">
+                            <span>Insights</span>
+                            <svg class="ml-1 w-4 h-4 arrow transition-transform duration-200" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </a>
+
+                        <!-- About Us -->
+                        <a href="#" data-target="about" class="py-3 flex items-center hover:text-black hover:font-bold">
+                            <span>About Us</span>
+                            <svg class="ml-1 w-4 h-4 arrow transition-transform duration-200" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </a>
                     </nav>
+
+
+                    <!-- Solutions Overlay -->
+                    <div id="solutions-overlay" class="fixed top-[80px] left-0 mx-[30px] w-[calc(100%-60px)]
+                          max-h-0 overflow-hidden bg-white shadow-lg transition-all duration-500 z-40">
+                        <div class="grid grid-cols-4 h-[500px]"> <!-- fixed height so right content is visible -->
+
+                            <!-- Left Menu -->
+                            <div class="bg-[#f3f3ea] p-12  col-span-1">
+                                <ul id="solutions-menu" class="space-y-8 text-gray-700 text-[14px] mb-[80px]">
+                                    <li data-content="commercial" class="cursor-pointer hover:text-black font-bold">
+                                        Commercial Banking
+                                    </li>
+                                    <li data-content="credit" class="cursor-pointer hover:text-black">
+                                        Credit and Financing
+                                    </li>
+                                    <li data-content="invest" class="cursor-pointer hover:text-black">
+                                        Institutional Investing
+                                    </li>
+                                    <li data-content="ibank" class="cursor-pointer hover:text-black">
+                                        Investment Banking
+                                    </li>
+                                    <li data-content="payments" class="cursor-pointer hover:text-black">
+                                        Payments
+                                    </li>
+                                    <li data-content="private" class="cursor-pointer hover:text-black">
+                                        Private Bank
+                                    </li>
+                                    <li data-content="wealth" class="cursor-pointer hover:text-black">
+                                        Wealth Management
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <!-- Right Content -->
+                            <div class="col-span-3 p-12 overflow-y-auto bg-gray-50">
+                                <!-- Commercial Banking -->
+                                <div id="commercial" class="solutions-content">
+                                    <h2 class="text-4xl font-light mb-4 hover:underline">Commercial Banking</h2>
+                                    <p class="text-gray-600 mb-6">
+                                        From startups to legacy brands, you're making your mark. We're here to help.
+                                    </p>
+
+                                    <div class="grid grid-cols-3 gap-12 text-sm">
+                                        <div>
+                                            <h3 class="font-semibold mb-1">Innovation Economy →</h3>
+                                            <p class="text-gray-600">Fueling early-stage startups, venture-backed and
+                                                high-growth companies.</p>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold mb-1">Midsize Businesses →</h3>
+                                            <p class="text-gray-600">Custom banking solutions for middle market
+                                                businesses and industries.</p>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold mb-1">Large Corporations →</h3>
+                                            <p class="text-gray-600">Innovative solutions tailored to corporations and
+                                                specialized industries.</p>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold mb-1">Commercial Real Estate →</h3>
+                                            <p class="text-gray-600">Capitalize on opportunities throughout the real
+                                                estate cycle.</p>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold mb-1">Community Impact Banking →</h3>
+                                            <p class="text-gray-600">Helping local businesses, organizations, and
+                                                institutions thrive.</p>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold mb-1">International Banking →</h3>
+                                            <p class="text-gray-600">Support for your business’ global growth and
+                                                expansion.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Credit and Financing -->
+                                <div id="credit" class="solutions-content hidden">
+                                    <h2 class="text-4xl font-light mb-4 hover:underline">Credit and Financing</h2>
+                                    <p class="text-gray-600 mb-6">
+                                        Prepare for future growth with customized loan services, succession planning and
+                                        capital for business equipment.
+                                    </p>
+                                    <div class="grid grid-cols-3 gap-12 text-sm">
+                                        <div>
+                                            <h3 class="font-semibold mb-1">Asset Based Lending →</h3>
+                                            <p class="text-gray-600">Enhance your liquidity and gain the flexibility to
+                                                capitalize on growth opportunities.</p>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold mb-1">Equipment Financing →</h3>
+                                            <p class="text-gray-600">Maximize working capital with flexible equipment
+                                                and technology financing.</p>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold mb-1">Trade & Working Capital →</h3>
+                                            <p class="text-gray-600">Solutions to help buyers and suppliers meet their
+                                                working capital, risk mitigation and cash flow objectives.</p>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold mb-1">Syndicated Financing →</h3>
+                                            <p class="text-gray-600">Leverage customized loan syndication services from
+                                                a dedicated resource.</p>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold mb-1">Commercial Real Estate →</h3>
+                                            <p class="text-gray-600">Capitalize on opportunities and prepare for
+                                                challenges throughout the real estate cycle.</p>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold mb-1">Employee Stock Ownership Plans →</h3>
+                                            <p class="text-gray-600">Plan for your business’s future—and your employees’
+                                                futures too—with objective advice and financing.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Close button -->
+                        <button id="closeSolutions"
+                            class="absolute top-4 right-6 text-2xl font-light text-gray-400 hover:text-black"></button>
+                    </div>
+
+
+                    <!-- Who We Serve Overlay -->
+                    <div id="who-overlay" class="fixed top-[80px] left-0 mx-[30px] w-[calc(100%-60px)]
+                      max-h-0 overflow-hidden bg-white shadow-lg transition-all duration-500 z-40">
+                        <div class="grid grid-cols-4 h-[400px]">
+                            <!-- Left Menu -->
+                            <div class="bg-[#f3f3ea] p-8  col-span-1">
+                                <ul id="who-menu" class="space-y-6 text-gray-700 text-sm">
+                                    <li class="cursor-pointer">Corporations</li>
+                                    <li class="cursor-pointer">Governments</li>
+                                    <li class="cursor-pointer">Institutions</li>
+                                    <li class="cursor-pointer">Individuals</li>
+                                </ul>
+                            </div>
+
+                            <!-- Right Content -->
+                            <div class="col-span-3 p-8 bg-gray-50 ">
+                                <h2 class="text-3xl font-light mb-4">Corporations</h2>
+                                <p class="text-gray-600">Tailored banking solutions for global corporations.</p>
+                            </div>
+                        </div>
+
+                        <!-- Close -->
+                        <button id="closeWho" class="absolute top-4 right-6 text-2xl"></button>
+                    </div>
+
+                    <!-- Insights Overlay -->
+                    <div id="insight-overlay" class="fixed top-[80px] left-0 mx-[30px] w-[calc(100%-60px)]
+                         max-h-0 overflow-hidden bg-white shadow-lg transition-all duration-500 z-40">
+                        <div class="grid grid-cols-3 h-[400px]">
+                            <!-- Left Menu -->
+                            <div class="bg-[#f3f3ea] p-8  col-span-1">
+                                <ul id="insight-menu" class="space-y-6 text-gray-700 text-sm">
+                                    <li class="cursor-pointer font-bold">All Insights</li>
+                                    <li class="cursor-pointer">Insights by Topic</li>
+                                    <li class="cursor-pointer">Insights by Type</li>
+                                </ul>
+                            </div>
+
+                            <!-- Right Content -->
+                            <div class="col-span-2 p-8 bg-gray-50">
+                                <h2 class="text-3xl font-light mb-4">All Insights</h2>
+                                <p class="text-gray-600">Explore a variety of insights tailored for businesses and
+                                    individuals.</p>
+                            </div>
+                        </div>
+
+                        <!-- Close -->
+                        <button id="closeInsight" class="absolute top-4 right-6 text-2xl"></button>
+                    </div>
+
+                    <!-- About Us Overlay -->
+                    <div id="about-overlay" class="fixed top-[70px] left-0  mx-[30px] w-[calc(100%-60px)]
+                            max-h-0 overflow-hidden bg-gray-50 shadow-lg transition-all duration-500 z-40">
+                        <div class=" h-[400px]">
+                            <!-- Left Menu -->
+                            <div class="ml-[60px] mt-10 ">
+                                <h2 class="text-4xl text-black mb-[30px]"> About US</h2>
+                                <p class="mb-[40px]">We aim to be the most respected financial services firm in the
+                                    world, serving
+                                    corporations and individuals in more than 100 countries.</p>
+                            </div>
+
+                            <!-- Right Content -->
+                            <div class="ml-[60px]">
+                                <ul class=" gap-y-6">
+                                    <li class=" text-gray-900 font-thin ">Contact us</li>
+                                    <li class=" text-gray-900 font-thin "> News and stories</li>
+                                    <li class=" text-gray-900 font-thin ">Media centre</li>
+                                    <li class=" text-gray-900 font-thin ">Event and confernces</li>
+                                    <li class=" text-gray-900 font-thin ">Impact</li>
+                                    <li class=" text-gray-900 font-thin ">Technology at Our Firm</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Close -->
+                        <button id="closeAbout" class="absolute top-4 right-6 text-2xl"></button>
+                    </div>
+
+
+
+
+
 
                     <!-- Right: utilities (desktop) -->
                     <div class="hidden md:flex items-center text-[10px] font-medium text-[#3d1815] space-x-3">
@@ -103,100 +349,128 @@
         </div>
     </header>
 
-    <!--1st page  // 1-->
-    <main id="page1" class="relative px-[30px] grid grid-cols-1 md:grid-cols-2 items-center w-full min-h-screen mt-0">
 
-        <!-- Column 1: Text -->
-        <div class="flex flex-col text-[#3b3a38] pt-0 pl-[190px] h-full justify-center">
-            <h2 class="text-4xl font-normal leading-snug mb-4">
-                US tariffs: What’s the impact <br> on global trade and the <br> economy?
-            </h2>
-            <p class="text-gray-600 mb-6">
-                J.P. Morgan Research will bring you the latest updates and <br> analysis
-                of President Trump’s tariff proposals and their <br>economic impact.
-            </p>
-            <button
-                class="bg-[#10719e] hover:bg-[#285b7a] hover:underline transition text-white font-semibold tracking-wide py-2 px-6 rounded w-fit">
-                READ MORE
-            </button>
+    <div id="pageWrapper" class="relative w-full h-screen overflow-hidden">
+        <div id="slider" class="flex transition-transform duration-700 ease-in-out w-[300%]">
+            <!-- Example for one page section -->
+            <main id="page1"
+                class="w-full px-4 sm:px-8 md:px-[30px] grid grid-cols-1 md:grid-cols-2 items-center min-h-screen">
+
+                <!-- Column 1: Text -->
+                <div
+                    class="flex flex-col text-[#3b3a38] pt-6 md:pt-0 md:pl-[190px] h-full justify-center text-center md:text-left">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-normal leading-snug mb-4">
+                        US tariffs: What’s the impact <br class="hidden md:block">
+                        on global trade and the <br class="hidden md:block">
+                        economy?
+                    </h2>
+                    <p class="text-gray-600 mb-6 text-sm sm:text-base">
+                        J.P. Morgan Research will bring you the latest updates and
+                        analysis of tariff proposals and their economic impact.
+                    </p>
+                    <button
+                        class="bg-[#10719e] hover:bg-[#285b7a] hover:underline transition text-white font-semibold tracking-wide py-2 px-6 rounded w-fit mx-auto md:mx-0">
+                        READ MORE
+                    </button>
+                </div>
+
+                <!-- Column 2: Image -->
+                <div class="flex justify-center md:justify-end h-full mt-6 md:mt-0">
+                    <img src="./images/first_img1.jpg" alt="Trade Image"
+                        class="object-cover object-top w-full sm:w-[80%] md:w-full h-[300px] sm:h-[400px] md:h-[690px]" />
+                </div>
+            </main>
+
+
+            <!-- 1st page // 2 -->
+            <main id="page2"
+                class="w-full px-4 sm:px-8 md:px-[30px] grid grid-cols-1 md:grid-cols-2 items-center min-h-screen">
+
+                <!-- Column 1: Text -->
+                <div
+                    class="flex flex-col text-[#3b3a38] pt-6 md:pt-0 md:pl-[190px] h-full justify-center text-center md:text-left">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-normal leading-snug mb-4">
+                        Currency volatility: Will the <br class="hidden md:block">
+                        US dollar regain its <br class="hidden md:block">
+                        strength?
+                    </h2>
+                    <p class="text-gray-600 mb-6 text-sm sm:text-base">
+                        In light of ongoing tariff uncertainty, will the dollar continue its downtrend?
+                        And what’s the outlook for other major currencies?
+                    </p>
+                    <button
+                        class="bg-[#10719e] hover:bg-[#285b7a] hover:underline transition text-white font-semibold tracking-wide py-2 px-6 rounded w-fit mx-auto md:mx-0">
+                        READ MORE
+                    </button>
+                </div>
+
+                <!-- Column 2: Image -->
+                <div class="flex justify-center md:justify-end h-full mt-6 md:mt-0">
+                    <img src="./images/first_img1_2.jpg" alt="Trade Image"
+                        class="object-cover object-top w-full sm:w-[80%] md:w-full h-[300px] sm:h-[400px] md:h-[690px]" />
+                </div>
+            </main>
+
+
+            <!-- 1st page // 3 -->
+            <main id="page3"
+                class="w-full px-4 sm:px-8 md:px-[30px] grid grid-cols-1 md:grid-cols-2 items-center min-h-screen">
+
+                <!-- Column 1: Text -->
+                <div
+                    class="flex flex-col text-[#3b3a38] pt-6 md:pt-0 md:pl-[190px] h-full justify-center text-center md:text-left">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-normal leading-snug mb-4">
+                        3Q 2025 Guide to the <br class="hidden md:block">
+                        Markets
+                    </h2>
+                    <p class="text-gray-600 mb-6 text-sm sm:text-base">
+                        This quarter’s Guide explores the outlook for the economy,
+                        recent policy developments and their potential implications
+                        for investment.
+                    </p>
+                    <button
+                        class="bg-[#10719e] hover:bg-[#285b7a] hover:underline transition text-white font-semibold tracking-wide py-2 px-6 rounded w-fit mx-auto md:mx-0">
+                        READ MORE
+                    </button>
+                </div>
+
+                <!-- Column 2: Image -->
+                <div class="flex justify-center md:justify-end h-full mt-6 md:mt-0">
+                    <img src="./images/first_img1_3.jpg" alt="Markets Guide Image"
+                        class="object-cover object-top w-full sm:w-[80%] md:w-full h-[300px] sm:h-[400px] md:h-[690px]" />
+                </div>
+            </main>
+
+
         </div>
+    </div>
 
-        <!-- Column 2: Image -->
-        <div class="flex justify-end h-full">
-            <img src="./images/first_img1.jpg" alt="Trade Image" class="object-cover object-top w-full h-[690px] " />
-        </div>
-    </main>
-
-    <!--1st page  // 2-->
-    <main id="page2"
-        class=" hidden relative px-[30px] grid grid-cols-1 md:grid-cols-2 items-center w-full min-h-screen mt-0 ">
-
-        <!-- Column 2: Text -->
-        <div class="flex flex-col text-[#3b3a38] pt-0 pl-[190px] h-full justify-center">
-            <h2 class="text-4xl font-normal leading-snug mb-4">
-                Currency volatility: Will the <br> US dollar regain its <br>strength?
-            </h2>
-            <p class="text-gray-600 mb-6">
-                In light of ongoing tariff uncertainty, will the dollar continue <br> its downtrend? And what’s the
-                outlook
-                for other major <br> currencies?
-            </p>
-            <button
-                class="bg-[#10719e] hover:bg-[#285b7a] hover:underline transition text-white font-semibold tracking-wide py-2 px-6 rounded w-fit">
-                READ MORE
-            </button>
-        </div>
-
-        <!-- Column 2: Image -->
-        <div class="flex justify-end h-full">
-            <img src="./images/first_img1_2.jpg" alt="Trade Image" class="object-cover object-top w-full h-[690px] " />
-        </div>
-    </main>
-
-    <!-- 1st page // 3 -->
-    <main id="page3"
-        class="hidden relative px-[30px] grid grid-cols-1 md:grid-cols-2 items-center w-full min-h-screen mt-0">
-
-        <!-- Column 3: Text -->
-        <div class="flex flex-col text-[#3b3a38] pt-0 pl-[190px] h-full justify-center">
-            <h2 class="text-4xl font-normal leading-snug mb-4">
-                3Q 2025 Guide to the <br>Markets
-            </h2>
-            <p class="text-gray-600 mb-6">
-                This quarter’s Guide explores the outlook for the economy,<br> recent policy developments and their
-                potential implications <br> for investment.
-            </p>
-            <button
-                class="bg-[#10719e] hover:bg-[#285b7a] hover:underline transition text-white font-semibold tracking-wide py-2 px-6 rounded w-fit">
-                READ MORE
-            </button>
-        </div>
-
-        <!-- Column 2: Image -->
-        <div class="flex justify-end h-full">
-            <img src="./images/first_img1_3.jpg" alt="Trade Image" class="object-cover object-top w-full h-[690px] " />
-        </div>
-    </main>
-
-    <!--  ul li for page scrolling  -->
+    <!-- ul li for page scrolling -->
     <div class="bg-gray-100 w-[68%] h-[150px] ml-[30px] -mt-[155px] overflow-hidden relative flex items-center">
-        <ul class="flex justify-center items-center w-full h-full text-[13px] gap-x-6">
+        <ul class="flex justify-center items-center w-full h-full text-[13px] gap-x-6 text-center">
+
+            <!-- Item 1 -->
             <li data-target="page1"
-                class="flex justify-center items-center px-10  hover:text-black hover:font-bold cursor-pointer bg-gray-100 relative">
-                US Tariffs: What's the impact on global <br> trade and...
-                <span class="absolute right-0 h-14 border-r border-gray-400"></span>
+                class="flex justify-center items-center px-6 md:px-10 hover:text-black hover:font-bold cursor-pointer bg-gray-100 relative">
+                US Tariffs: What's the impact on global <br class="hidden sm:block"> trade and...
+                <span class="absolute right-0 h-10 border-r border-gray-400"></span>
             </li>
+
+            <!-- Item 2 -->
             <li data-target="page2"
-                class="flex justify-center items-center px-10 hover:text-black hover:font-bold cursor-pointer bg-gray-100 relative">
-                Currency volatility: Will the US dollar <br> regain its strength?
-                <span class="absolute right-0 h-14 border-r border-gray-400"></span>
+                class="flex justify-center items-center px-6 md:px-10 hover:text-black hover:font-bold cursor-pointer bg-gray-100 relative">
+                Currency volatility: Will the US dollar <br class="hidden sm:block"> regain its strength?
+                <span class="absolute right-0 h-10 border-r border-gray-400"></span>
             </li>
+
+            <!-- Item 3 -->
             <li data-target="page3"
-                class="flex justify-center items-center px-10 hover:text-black hover:font-bold cursor-pointer bg-gray-100">
+                class="flex justify-center items-center px-6 md:px-10 hover:text-black hover:font-bold cursor-pointer bg-gray-100">
                 3Q 2025 guide to the Markets
             </li>
         </ul>
     </div>
+
 
 
 
@@ -250,14 +524,14 @@
         </div>
 
         <!-- Right Column (70%) -->
-        <div class="flex flex-col justify-center pl-10">
+        <div class="flex flex-col justify-start pl-10">
             <!-- Heading -->
             <h2 class="text-5xl font-[350] text-gray-800 mt-[110px] ml-[50px]">
                 What problem can we <span class="text-[#895240]">solve <br> together?</span>
             </h2>
 
             <!-- Card Slider -->
-            <div class="relative mt-20 w-full overflow-hidden">
+            <div class="relative mt-20 -ml-40  w-full  overflow-hidden">
                 <!-- Cards wrapper (slider track) -->
                 <div id="cardSlider" class="flex gap-6 transition-transform duration-500 ease-in-out">
 
@@ -360,10 +634,9 @@
 
 
 
-
                 <!-- Navigation Wrapper -->
-                <div class="relative flex items-center justify-center mt-10 h-[60px] w-full max-w-[500px] mx-auto 
-            bg-white border border-transparent hover:border-dashed hover:border-black ">
+                <div class="hidden md:flex relative items-center justify-center mt-10 h-[60px] w-full max-w-[500px] mx-auto 
+    bg-white border border-transparent hover:border-dashed hover:border-black">
 
                     <!-- Prev Arrow -->
                     <button id="prevCard"
@@ -374,51 +647,53 @@
                     <!-- Dots -->
                     <div class="flex space-x-4">
                         <button class="dot w-3 h-3 rounded-full border border-gray-500 relative 
-           hover:bg-black hover:border-black 
-           after:content-[''] after:absolute after:top-1/2 after:left-1/2 
-           after:-translate-x-1/2 after:-translate-y-1/2 
-           after:rounded-full 
-           hover:after:w-6 hover:after:h-6 hover:after:border-2 hover:after:border-gray-400">
+       hover:bg-black hover:border-black 
+       after:content-[''] after:absolute after:top-1/2 after:left-1/2 
+       after:-translate-x-1/2 after:-translate-y-1/2 
+       after:rounded-full 
+       hover:after:w-6 hover:after:h-6 hover:after:border-2 hover:after:border-gray-400">
                         </button>
 
                         <button class="dot w-3 h-3 rounded-full border border-gray-500 relative 
-           hover:bg-black hover:border-black 
-           after:content-[''] after:absolute after:top-1/2 after:left-1/2 
-           after:-translate-x-1/2 after:-translate-y-1/2 
-           after:rounded-full 
-           hover:after:w-6 hover:after:h-6 hover:after:border-2 hover:after:border-gray-400">
+       hover:bg-black hover:border-black 
+       after:content-[''] after:absolute after:top-1/2 after:left-1/2 
+       after:-translate-x-1/2 after:-translate-y-1/2 
+       after:rounded-full 
+       hover:after:w-6 hover:after:h-6 hover:after:border-2 hover:after:border-gray-400">
                         </button>
 
                         <button class="dot w-3 h-3 rounded-full border border-gray-500 relative 
-           hover:bg-black hover:border-black 
-           after:content-[''] after:absolute after:top-1/2 after:left-1/2 
-           after:-translate-x-1/2 after:-translate-y-1/2 
-           after:rounded-full 
-           hover:after:w-6 hover:after:h-6 hover:after:border-2 hover:after:border-gray-400">
+       hover:bg-black hover:border-black 
+       after:content-[''] after:absolute after:top-1/2 after:left-1/2 
+       after:-translate-x-1/2 after:-translate-y-1/2 
+       after:rounded-full 
+       hover:after:w-6 hover:after:h-6 hover:after:border-2 hover:after:border-gray-400">
                         </button>
 
                         <button class="dot w-3 h-3 rounded-full border border-gray-500 relative 
-           hover:bg-black hover:border-black 
-           after:content-[''] after:absolute after:top-1/2 after:left-1/2 
-           after:-translate-x-1/2 after:-translate-y-1/2 
-           after:rounded-full 
-           hover:after:w-6 hover:after:h-6 hover:after:border-2 hover:after:border-gray-400">
+       hover:bg-black hover:border-black 
+       after:content-[''] after:absolute after:top-1/2 after:left-1/2 
+       after:-translate-x-1/2 after:-translate-y-1/2 
+       after:rounded-full 
+       hover:after:w-6 hover:after:h-6 hover:after:border-2 hover:after:border-gray-400">
                         </button>
 
                         <button class="dot w-3 h-3 rounded-full border border-gray-500 relative 
-           hover:bg-black hover:border-black
-           after:content-[''] after:absolute after:top-1/2 after:left-1/2 
-           after:-translate-x-1/2 after:-translate-y-1/2 
-           after:rounded-full 
-           hover:after:w-6 hover:after:h-6 hover:after:border-2 hover:after:border-gray-400">
+       hover:bg-black hover:border-black
+       after:content-[''] after:absolute after:top-1/2 after:left-1/2 
+       after:-translate-x-1/2 after:-translate-y-1/2 
+       after:rounded-full 
+       hover:after:w-6 hover:after:h-6 hover:after:border-2 hover:after:border-gray-400">
                         </button>
                     </div>
+
                     <!-- Next Arrow -->
                     <button id="nextCard"
                         class="absolute right-3 bg-white border rounded-full w-10 h-10 flex items-center justify-center shadow">
                         ›
                     </button>
                 </div>
+
 
 
             </div>
@@ -683,8 +958,6 @@
 
         </div>
     </footer>
-
-
     <script src="script.js"></script>
 
 </body>
