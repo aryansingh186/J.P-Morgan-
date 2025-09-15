@@ -1,243 +1,511 @@
-document.addEventListener("DOMContentLoaded", () => {
-  /* ===========================
-     1. Mobile menu
-  =========================== */
-  const navToggle = document.getElementById("nav-toggle");
-  const navClose = document.getElementById("nav-close");
-  const mobileMenu = document.getElementById("mobile-menu");
-
-  if (navToggle && navClose && mobileMenu) {
-    navToggle.addEventListener("click", () => mobileMenu.classList.remove("hidden"));
-    navClose.addEventListener("click", () => mobileMenu.classList.add("hidden"));
-  }
-
-  /* ===========================
-     2. Helpers
-  =========================== */
-  const cap = s => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
-
-  function closeOverlay(overlay, trigger) {
-    if (!overlay) return;
-    overlay.classList.replace("max-h-[50%]", "max-h-0");
-    overlay.classList.remove("overlay-open");
-    if (trigger) trigger.classList.remove("border-dashed", "border", "border-black");
-  }
-
-  function openOverlay(overlay, trigger, heightClass = "max-h-[50%]") {
-    if (!overlay) return;
-
-    if (!overlay.classList.contains("max-h-0")) overlay.classList.add("max-h-0");
-
-    // Close all other overlays
-    document.querySelectorAll(".overlay-open").forEach(o => {
-      if (o !== overlay) {
-        const trg = document.querySelector(`[data-target="${o.id.replace("-overlay","")}"]`);
-        closeOverlay(o, trg);
-      }
-    });
-
-    overlay.classList.replace("max-h-0", heightClass);
-    overlay.classList.add("overlay-open");
-  }
-
-  function closeAllOverlays() {
-    document.querySelectorAll("[id$='-overlay']").forEach(o => {
-      const trg = document.querySelector(`[data-target="${o.id.replace("-overlay","")}"]`);
-      closeOverlay(o, trg);
-    });
-  }
-  
-
-  /* ===========================
-     3. Overlay triggers
-  =========================== */
-  const triggerNodeList = document.querySelectorAll(".menu-btn, header [data-target]");
-  const triggers = Array.from(triggerNodeList).filter(Boolean);
-
-  triggers.forEach(trigger => {
-    const target = trigger.getAttribute("data-target") || trigger.dataset.target;
-    if (!target) return;
-
-    const overlayId = `${target}-overlay`;
-    const overlay = document.getElementById(overlayId);
-    if (!overlay) return;
-
-    if (!overlay.classList.contains("max-h-0") && !overlay.classList.contains("max-h-[50%]")) {
-      overlay.classList.add("max-h-0");
+// J.P. Morgan Website Interactive JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // ==================== NAVIGATION FUNCTIONALITY ====================
+    
+    // Mobile Navigation Toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navClose = document.getElementById('nav-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (navToggle && mobileMenu) {
+        navToggle.addEventListener('click', function() {
+            mobileMenu.classList.remove('hidden');
+        });
     }
-
-    let closeBtn =
-      overlay.querySelector("[data-close]") ||
-      document.getElementById(`close${cap(target)}`) ||
-      overlay.querySelector(".close-btn");
-
-    trigger.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (overlay.classList.contains("overlay-open")) {
-        closeOverlay(overlay, trigger);
-      } else {
-        openOverlay(overlay, trigger);
-      }
-    });
-
-    if (closeBtn) closeBtn.addEventListener("click", () => closeOverlay(overlay, trigger));
-  });
-
-  // Close overlay on ESC
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeAllOverlays();
-  });
-
-  // Close overlay on outside click
-  document.addEventListener("click", (e) => {
-    const openOverlayEl = document.querySelector(".overlay-open");
-    if (!openOverlayEl) return;
-
-    const clickedInsideOverlay = !!e.target.closest("[id$='-overlay']");
-    const clickedTrigger = !!e.target.closest(".menu-btn, header [data-target]");
-    if (!clickedInsideOverlay && !clickedTrigger) closeAllOverlays();
-  });
-
-  /* ===========================
-     4. Arrow + Border toggle for nav links
-  =========================== */
-  const navLinks = document.querySelectorAll("nav a");
-
-  navLinks.forEach(link => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      // Reset all links
-      navLinks.forEach(l => {
-        l.classList.remove("border-dashed", "border", "border-black");
-        const arrowIcon = l.querySelector(".arrow");
-        if (arrowIcon) arrowIcon.classList.remove("rotate-180");
-      });
-
-      // Add styles to current link
-      this.classList.add("border-dashed", "border", "border-black");
-      let arrow = this.querySelector(".arrow");
-      if (arrow) arrow.classList.add("rotate-180");
-    });
-  });
-
-  /* ===========================
-     5. Menu highlight
-  =========================== */
-  function setupMenuHighlight(menuSelector) {
-    const menuItems = document.querySelectorAll(menuSelector);
-    if (!menuItems.length) return;
-    menuItems.forEach(item => {
-      item.addEventListener("click", () => {
-        menuItems.forEach(li => li.classList.remove("font-bold", "text-black"));
-        item.classList.add("font-bold", "text-black");
-      });
-    });
-  }
-
-  setupMenuHighlight("#solutions-menu li");
-  setupMenuHighlight("#who-menu li");
-  setupMenuHighlight("#insight-menu li");
-  setupMenuHighlight("#about-menu li");
-
-  /* ===========================
-     6. Card Slider
-  =========================== */
-  const slider = document.getElementById("cardSlider");
-  const prevBtn = document.getElementById("prevCard");
-  const nextBtn = document.getElementById("nextCard");
-  const dots = Array.from(document.querySelectorAll(".dot"));
-  let currentIndex = 0;
-  const cardWidth = 330 + 24;
-
-  function updateSlider() {
-    if (!slider) return;
-    slider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("bg-black", i === currentIndex);
-      dot.classList.toggle("bg-white", i !== currentIndex);
-    });
-  }
-
-  if (nextBtn && prevBtn && dots.length) {
-    nextBtn.addEventListener("click", () => { if (currentIndex < dots.length - 1) currentIndex++; updateSlider(); });
-    prevBtn.addEventListener("click", () => { if (currentIndex > 0) currentIndex--; updateSlider(); });
-    dots.forEach((dot, i) => dot.addEventListener("click", () => { currentIndex = i; updateSlider(); }));
-    updateSlider();
-  }
-
-  /* ===========================
-     7. Page navigation (Slider)
-  =========================== */
-  const navItems = Array.from(document.querySelectorAll("ul li[data-target]"));
-  const pages = Array.from(document.querySelectorAll("main[id^='page']"));
-
-  if (pages.length) {
-    // Sab pages ko left/right offscreen position do
-    pages.forEach((page, idx) => {
-      page.style.transition = "transform 0.5s ease, opacity 0.5s ease";
-      page.style.position = "absolute";
-      page.style.top = "0";
-      page.style.left = "0";
-      page.style.width = "100%";
-      page.style.opacity = idx === 0 ? "1" : "0";
-      page.style.transform = idx === 0 ? "translateX(0)" : "translateX(100%)";
-    });
-
-    let currentPage = 0;
-
-    function showPage(index) {
-      if (index === currentPage) return;
-
-      const direction = index > currentPage ? 1 : -1; // forward ya backward
-      const oldPage = pages[currentPage];
-      const newPage = pages[index];
-
-      // Old page ko slide out
-      oldPage.style.transform = `translateX(${-100 * direction}%)`;
-      oldPage.style.opacity = "0";
-
-      // New page ko screen me slide in
-      newPage.style.transform = "translateX(0)";
-      newPage.style.opacity = "1";
-
-      currentPage = index;
+    
+    if (navClose && mobileMenu) {
+        navClose.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+        });
     }
-
-    navItems.forEach((item, idx) => {
-      item.addEventListener("click", () => {
-        showPage(idx);
-
-        // Menu highlight
-        navItems.forEach(li => li.classList.remove("font-bold", "text-black"));
-        item.classList.add("font-bold", "text-black");
-      });
+    
+    // Desktop Navigation Overlays
+    const overlays = {
+        'solutions': {
+            trigger: '[data-target="solutions"]',
+            overlay: '#solutions-overlay',
+            close: '#closeSolutions',
+            menu: '#solutions-menu',
+            content: '.solutions-content'
+        },
+        'who': {
+            trigger: '[data-target="who"]',
+            overlay: '#who-overlay',
+            close: '#closeWho',
+            menu: '#who-menu',
+            content: '.who-content'
+        },
+        'insight': {
+            trigger: '[data-target="insight"]',
+            overlay: '#insight-overlay',
+            close: '#closeInsight',
+            menu: '#insight-menu',
+            content: '.insight-content'
+        },
+        'about': {
+            trigger: '[data-target="about"]',
+            overlay: '#about-overlay',
+            close: '#closeAbout',
+            menu: '#about-menu',
+            content: '.about-content'
+        }
+    };
+    
+    // Initialize overlay functionality
+    Object.keys(overlays).forEach(key => {
+        const config = overlays[key];
+        const trigger = document.querySelector(config.trigger);
+        const overlay = document.querySelector(config.overlay);
+        const closeBtn = document.querySelector(config.close);
+        const menu = document.querySelector(config.menu);
+        
+        if (trigger && overlay) {
+            // Open overlay
+            trigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                closeAllOverlays();
+                overlay.style.maxHeight = '500px';
+                
+                // Show first content by default
+                const firstMenuItem = menu?.querySelector('li[data-content]');
+                if (firstMenuItem) {
+                    const contentId = firstMenuItem.getAttribute('data-content');
+                    showOverlayContent(key, contentId);
+                    setActiveMenuItem(menu, firstMenuItem);
+                }
+                
+                // Rotate arrow
+                const arrow = trigger.querySelector('.arrow');
+                if (arrow) {
+                    arrow.style.transform = 'rotate(180deg)';
+                }
+            });
+            
+            // Close overlay
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    closeOverlay(key, overlay, trigger);
+                });
+            }
+            
+            // Menu item interactions
+            if (menu) {
+                const menuItems = menu.querySelectorAll('li[data-content]');
+                menuItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        const contentId = this.getAttribute('data-content');
+                        showOverlayContent(key, contentId);
+                        setActiveMenuItem(menu, this);
+                    });
+                });
+            }
+        }
     });
-  }
-  document.addEventListener("DOMContentLoaded", () => {
-  const menuItems = document.querySelectorAll("#solutions-menu li");
-  const contentItems = document.querySelectorAll(".solutions-content");
-
-  menuItems.forEach(item => {
-    item.addEventListener("click", () => {
-      // 1. Remove active classes from all menu items
-      menuItems.forEach(i => i.classList.remove("font-bold", "text-black"));
-      // 2. Add active class to clicked item
-      item.classList.add("font-bold", "text-black");
-
-      // 3. Hide all content sections
-      contentItems.forEach(c => c.classList.add("hidden"));
-
-      // 4. Show content corresponding to clicked menu
-      const target = item.getAttribute("data-content"); // matches the right div ID
-      const content = document.getElementById(target);
-      if (content) content.classList.remove("hidden");
+    
+    function closeAllOverlays() {
+        Object.keys(overlays).forEach(key => {
+            const overlay = document.querySelector(overlays[key].overlay);
+            const trigger = document.querySelector(overlays[key].trigger);
+            if (overlay) {
+                closeOverlay(key, overlay, trigger);
+            }
+        });
+    }
+    
+    function closeOverlay(key, overlay, trigger) {
+        overlay.style.maxHeight = '0';
+        
+        // Reset arrow rotation
+        const arrow = trigger?.querySelector('.arrow');
+        if (arrow) {
+            arrow.style.transform = 'rotate(0deg)';
+        }
+    }
+    
+    function showOverlayContent(overlayKey, contentId) {
+        const config = overlays[overlayKey];
+        const allContent = document.querySelectorAll(config.content);
+        const targetContent = document.getElementById(contentId);
+        
+        // Hide all content
+        allContent.forEach(content => {
+            content.classList.add('hidden');
+        });
+        
+        // Show target content
+        if (targetContent) {
+            targetContent.classList.remove('hidden');
+        }
+    }
+    
+    function setActiveMenuItem(menu, activeItem) {
+        const allItems = menu.querySelectorAll('li');
+        allItems.forEach(item => {
+            item.classList.remove('font-bold');
+            item.classList.add('cursor-pointer', 'hover:text-black');
+        });
+        
+        activeItem.classList.add('font-bold');
+    }
+    
+    // Close overlays when clicking outside
+    document.addEventListener('click', function(e) {
+        const isNavClick = e.target.closest('[data-target]') || 
+                          e.target.closest('[id$="-overlay"]') ||
+                          e.target.closest('[id^="close"]');
+        
+        if (!isNavClick) {
+            closeAllOverlays();
+        }
     });
-  });
+    
+    // ==================== HERO SLIDER FUNCTIONALITY ====================
+    
+    const slider = document.getElementById('slider');
+    const tabItems = document.querySelectorAll('.tab-item');
+    let currentSlide = 0;
+    const totalSlides = 3;
+    let autoSlideInterval;
+    
+    // Initialize first slide as active
+    if (tabItems.length > 0) {
+        setActiveTab(0);
+    }
+    
+    // Tab click handlers
+    tabItems.forEach((tab, index) => {
+        tab.addEventListener('click', function() {
+            goToSlide(index);
+            resetAutoSlide();
+        });
+    });
+    
+    function goToSlide(index) {
+        if (index < 0 || index >= totalSlides) return;
+        
+        currentSlide = index;
+        const translateX = -(currentSlide * (100 / totalSlides));
+        
+        if (slider) {
+            slider.style.transform = `translateX(${translateX}%)`;
+        }
+        
+        setActiveTab(index);
+    }
+    
+    function setActiveTab(index) {
+        tabItems.forEach((tab, i) => {
+            const underline = tab.querySelector('.underline-bar');
+            if (i === index) {
+                tab.classList.add('font-bold');
+                if (underline) {
+                    underline.style.opacity = '1';
+                }
+            } else {
+                tab.classList.remove('font-bold');
+                if (underline) {
+                    underline.style.opacity = '0';
+                }
+            }
+        });
+    }
+    
+    function nextSlide() {
+        const next = (currentSlide + 1) % totalSlides;
+        goToSlide(next);
+    }
+    
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(nextSlide, 5000); // 5 seconds
+    }
+    
+    function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+    }
+    
+    // Start auto-slide
+    startAutoSlide();
+    
+    // Pause auto-slide on hover
+    const pageWrapper = document.getElementById('pageWrapper');
+    if (pageWrapper) {
+        pageWrapper.addEventListener('mouseenter', function() {
+            clearInterval(autoSlideInterval);
+        });
+        
+        pageWrapper.addEventListener('mouseleave', function() {
+            startAutoSlide();
+        });
+    }
+    
+    // ==================== CARD CAROUSEL FUNCTIONALITY ====================
+    
+    const cardSlider = document.getElementById('cardSlider');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtns = [document.getElementById('prevCard'), document.getElementById('prevCardDesktop')];
+    const nextBtns = [document.getElementById('nextCard'), document.getElementById('nextCardDesktop')];
+    
+    let cardCurrentSlide = 0;
+    const cardsPerView = {
+        mobile: 1,
+        tablet: 2,
+        desktop: 3
+    };
+    
+    // Initialize card carousel
+    if (cardSlider && dots.length > 0) {
+        updateCardCarousel();
+        setActiveDot(0);
+    }
+    
+    // Previous button handlers
+    prevBtns.forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', function() {
+                cardCurrentSlide = Math.max(0, cardCurrentSlide - 1);
+                updateCardCarousel();
+                setActiveDot(cardCurrentSlide);
+            });
+        }
+    });
+    
+    // Next button handlers
+    nextBtns.forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', function() {
+                const maxSlides = Math.max(0, dots.length - 1);
+                cardCurrentSlide = Math.min(maxSlides, cardCurrentSlide + 1);
+                updateCardCarousel();
+                setActiveDot(cardCurrentSlide);
+            });
+        }
+    });
+    
+    // Dot click handlers
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+            cardCurrentSlide = index;
+            updateCardCarousel();
+            setActiveDot(index);
+        });
+    });
+    
+    function updateCardCarousel() {
+        if (!cardSlider) return;
+        
+        const cardWidth = 346; // 330px + 16px gap
+        const currentCardsPerView = getCurrentCardsPerView();
+        const translateX = -(cardCurrentSlide * cardWidth * currentCardsPerView);
+        
+        cardSlider.style.transform = `translateX(${translateX}px)`;
+        
+        // Update button states
+        updateCardNavButtons();
+    }
+    
+    function getCurrentCardsPerView() {
+        const width = window.innerWidth;
+        if (width < 768) return cardsPerView.mobile;
+        if (width < 1024) return cardsPerView.tablet;
+        return cardsPerView.desktop;
+    }
+    
+    function setActiveDot(index) {
+        dots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.add('bg-black', 'border-black');
+                dot.classList.remove('border-gray-500');
+            } else {
+                dot.classList.remove('bg-black', 'border-black');
+                dot.classList.add('border-gray-500');
+            }
+        });
+    }
+    
+    function updateCardNavButtons() {
+        const isFirst = cardCurrentSlide === 0;
+        const isLast = cardCurrentSlide >= dots.length - 1;
+        
+        // Update button opacity/state
+        [...prevBtns, ...nextBtns].forEach(btn => {
+            if (btn) {
+                if ((prevBtns.includes(btn) && isFirst) || 
+                    (nextBtns.includes(btn) && isLast)) {
+                    btn.style.opacity = '0.5';
+                    btn.style.cursor = 'not-allowed';
+                } else {
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                }
+            }
+        });
+    }
+    
+    // Handle window resize for card carousel
+    window.addEventListener('resize', function() {
+        updateCardCarousel();
+    });
+    
+    // ==================== SMOOTH SCROLLING ====================
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // ==================== SCROLL ANIMATIONS ====================
+    
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements for animation
+    const animatedElements = document.querySelectorAll('main, section, .card');
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+    
+    // ==================== UTILITY FUNCTIONS ====================
+    
+    // Debounce function for performance
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // Throttle function for scroll events
+    function throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    }
+    
+    // ==================== HEADER SCROLL BEHAVIOR ====================
+    
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    
+    const handleScroll = throttle(function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (header) {
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up
+                header.style.transform = 'translateY(0)';
+            }
+        }
+        
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    }, 100);
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    // ==================== FORM HANDLING (if needed) ====================
+    
+    // Handle any forms on the page
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add form submission logic here
+            console.log('Form submitted:', new FormData(form));
+        });
+    });
+   
+    document.addEventListener('keydown', function(e) {
+        // Close overlays on Escape
+        if (e.key === 'Escape') {
+            closeAllOverlays();
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+        
+        // Navigate carousel with arrow keys
+        if (e.key === 'ArrowLeft' && cardCurrentSlide > 0) {
+            cardCurrentSlide--;
+            updateCardCarousel();
+            setActiveDot(cardCurrentSlide);
+        }
+        
+        if (e.key === 'ArrowRight' && cardCurrentSlide < dots.length - 1) {
+            cardCurrentSlide++;
+            updateCardCarousel();
+            setActiveDot(cardCurrentSlide);
+        }
+    });
+ 
+    const interactiveElements = document.querySelectorAll('button, a, [tabindex]');
+    interactiveElements.forEach(element => {
+        element.addEventListener('focus', function() {
+            this.classList.add('focus-visible');
+        });
+        
+        element.addEventListener('blur', function() {
+            this.classList.remove('focus-visible');
+        });
+    });
+    
 
-  // Optional: Open default tab (first one)
-  if (menuItems.length) menuItems[0].click();
-});
-  
-
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+    
+    
+    
+   
+    window.addEventListener('error', function(e) {
+        console.warn('JavaScript error caught:', e.error);
+       
+    });
+    
+    console.log('J.P. Morgan website JavaScript initialized successfully');
 });

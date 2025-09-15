@@ -44,7 +44,7 @@ npm install
 
 Run the dev server:
 
-npm run dev
+npm run serve
 
 
 Open your browser to http://localhost:3000 (or whatever your dev server URL is) to view changes live.

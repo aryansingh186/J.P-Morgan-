@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch",
-    "build": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css"
+    "build": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css",
+    "start": "http-server -p 3000",
+    "serve": "concurrently \"npm run dev\" \"http-server -p 4000\" \"npx opn http://localhost:4000\""
+
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.13",
     "tailwindcss": "^4.1.13"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "open": "^10.1.0",
+    "opn-cli": "^4.1.0"
   }
 }
