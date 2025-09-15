@@ -47,8 +47,7 @@ Run the dev server:
 npm run serve
 
 
-Open your browser to http://localhost:3000 (or whatever your dev server URL is) to view changes live.
-
+Open your browser
 🧩 Usage
 
 Click on the top tabs (US Tariffs…, Currency Volatility…, 3Q 2025 Guide…) to slide between sections
