@@ -58,5 +58,5 @@ Hover over dots & buttons for visual feedback (color change, border etc.)
 
 🔗 Live Demo
 
-[View live site](https://aryansingh186.github.io/J.P-Morgan-/?utm_source=chatgpt.com)
+[View live site](https://aryansingh186.github.io/J.P-Morgan-/)
 
